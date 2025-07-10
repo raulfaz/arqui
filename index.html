@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager - Gestión de Tareas</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css" rel="stylesheet">
+    <!-- Font Awesome para iconos adicionales -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            --danger-gradient: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+            --dark-gradient: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .auth-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .auth-header {
+            background: var(--primary-gradient);
+            color: white;
+            border-radius: 20px 20px 0 0;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .btn-gradient {
+            background: var(--primary-gradient);
+            border: none;
+            border-radius: 25px;
+            padding: 12px 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+        }
+
+        .btn-success-gradient {
+            background: var(--success-gradient);
+            border: none;
+            border-radius: 25px;
+            padding: 8px 20px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-danger-gradient {
+            background: var(--danger-gradient);
+            border: none;
+            border-radius: 25px;
+            padding: 8px 20px;
+            transition: all 0.3s ease;
+        }
+
+        .task-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+            margin-bottom: 1rem;
+        }
+
+        .task-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .task-card.completed {
+            border-left-color: #28a745;
+            opacity: 0.8;
+        }
+
+        .task-card.pending {
+            border-left-color: #ffc107;
+        }
+
+        .form-control {
+            border-radius: 15px;
+            border: 2px solid #e9ecef;
+            padding: 12px 20px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+
+        .dashboard-header {
+            background: var(--primary-gradient);
+            color: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .stats-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stats-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stats-number {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .navbar-custom {
+            background: var(--primary-gradient);
+            padding: 1rem 0;
+        }
+
+        .loading-spinner {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .task-actions {
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .task-card:hover .task-actions {
+            opacity: 1;
+        }
+
+        .alert-custom {
+            border-radius: 15px;
+            border: none;
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-floating .form-control {
+            border-radius: 15px;
+        }
+
+        .modal-content {
+            border-radius: 20px;
+            border: none;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .modal-header {
+            background: var(--primary-gradient);
+            color: white;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .btn-close-white {
+            filter: invert(1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-custom d-none" id="navbar">
+        <div class="container">
+            <a class="navbar-brand text-white fw-bold" href="#">
+                <i class="fas fa-tasks me-2"></i>Task Manager
+            </a>
+            <div class="navbar-nav ms-auto">
+                <span class="navbar-text text-white me-3" id="userWelcome"></span>
+                <button class="btn btn-outline-light btn-sm" onclick="logout()">
+                    <i class="fas fa-sign-out-alt me-1"></i>Cerrar Sesión
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenedor Principal -->
+    <div class="container-fluid">
+        <!-- Sección de Autenticación -->
+        <div id="authSection" class="d-flex justify-content-center align-items-center min-vh-100">
+            <div class="auth-container col-md-4 col-lg-3">
+                <div class="auth-header">
+                    <h2><i class="fas fa-tasks me-2"></i>Task Manager</h2>
+                    <p class="mb-0">Gestiona tus tareas de manera eficiente</p>
+                </div>
+                
+                <!-- Formulario de Login -->
+                <div id="loginForm" class="p-4">
+                    <h4 class="text-center mb-4">Iniciar Sesión</h4>
+                    <div id="authAlert"></div>
+                    
+                    <form onsubmit="login(event)">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="loginUsername" placeholder="Usuario" required>
+                            <label for="loginUsername"><i class="fas fa-user me-2"></i>Usuario</label>
+                        </div>
+                        <div class="form-floating mb-4">
+                            <input type="password" class="form-control" id="loginPassword" placeholder="Contraseña" required>
+                            <label for="loginPassword"><i class="fas fa-lock me-2"></i>Contraseña</label>
+                        </div>
+                        <button type="submit" class="btn btn-gradient w-100 text-white mb-3" id="loginBtn">
+                            <i class="fas fa-sign-in-alt me-2"></i>Iniciar Sesión
+                        </button>
+                    </form>
+                    
+                    <div class="text-center">
+                        <p class="mb-0">¿No tienes cuenta? 
+                            <a href="#" onclick="showRegister()" class="text-decoration-none fw-bold">Regístrate</a>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Formulario de Registro -->
+                <div id="registerForm" class="p-4 d-none">
+                    <h4 class="text-center mb-4">Registro</h4>
+                    <div id="registerAlert"></div>
+                    
+                    <form onsubmit="register(event)">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="registerUsername" placeholder="Usuario" required>
+                            <label for="registerUsername"><i class="fas fa-user me-2"></i>Usuario</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control" id="registerEmail" placeholder="Email" required>
+                            <label for="registerEmail"><i class="fas fa-envelope me-2"></i>Email</label>
+                        </div>
+                        <div class="form-floating mb-4">
+                            <input type="password" class="form-control" id="registerPassword" placeholder="Contraseña" required>
+                            <label for="registerPassword"><i class="fas fa-lock me-2"></i>Contraseña</label>
+                        </div>
+                        <button type="submit" class="btn btn-gradient w-100 text-white mb-3" id="registerBtn">
+                            <i class="fas fa-user-plus me-2"></i>Registrarse
+                        </button>
+                    </form>
+                    
+                    <div class="text-center">
+                        <p class="mb-0">¿Ya tienes cuenta? 
+                            <a href="#" onclick="showLogin()" class="text-decoration-none fw-bold">Inicia Sesión</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección del Dashboard -->
+        <div id="dashboardSection" class="d-none">
+            <div class="container mt-4">
+                <!-- Header del Dashboard -->
+                <div class="dashboard-header fade-in">
+                    <h1><i class="fas fa-tachometer-alt me-3"></i>Dashboard de Tareas</h1>
+                    <p class="mb-0">Organiza y gestiona tus tareas de manera efectiva</p>
+                </div>
+
+                <!-- Estadísticas -->
+                <div class="row mb-4 fade-in">
+                    <div class="col-md-4 mb-3">
+                        <div class="stats-card">
+                            <div class="stats-number text-primary" id="totalTasks">0</div>
+                            <div class="text-muted">Total Tareas</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="stats-card">
+                            <div class="stats-number text-warning" id="pendingTasks">0</div>
+                            <div class="text-muted">Pendientes</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="stats-card">
+                            <div class="stats-number text-success" id="completedTasks">0</div>
+                            <div class="text-muted">Completadas</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Formulario para Nueva Tarea -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="card task-card fade-in">
+                            <div class="card-header bg-transparent">
+                                <h5 class="mb-0"><i class="fas fa-plus-circle me-2"></i>Agregar Nueva Tarea</h5>
+                            </div>
+                            <div class="card-body">
+                                <form onsubmit="createTask(event)">
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <input type="text" class="form-control" id="taskTitle" placeholder="Título de la tarea" required>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <input type="text" class="form-control" id="taskDescription" placeholder="Descripción (opcional)">
+                                        </div>
+                                        <div class="col-md-2 mb-3">
+                                            <button type="submit" class="btn btn-success-gradient text-white w-100" id="createTaskBtn">
+                                                <i class="fas fa-plus me-1"></i>Agregar
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Loading Spinner -->
+                <div class="loading-spinner" id="loadingSpinner">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Cargando...</span>
+                    </div>
+                    <p class="mt-2">Cargando tareas...</p>
+                </div>
+
+                <!-- Lista de Tareas -->
+                <div id="tasksList" class="row">
+                    <!-- Las tareas se cargarán aquí dinámicamente -->
+                </div>
+
+                <!-- Mensaje cuando no hay tareas -->
+                <div id="noTasksMessage" class="text-center d-none">
+                    <div class="card task-card">
+                        <div class="card-body py-5">
+                            <i class="fas fa-tasks fa-4x text-muted mb-3"></i>
+                            <h4 class="text-muted">No tienes tareas</h4>
+                            <p class="text-muted">¡Agrega tu primera tarea para comenzar!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Editar Tarea -->
+    <div class="modal fade" id="editTaskModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="fas fa-edit me-2"></i>Editar Tarea</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form onsubmit="updateTask(event)">
+                        <input type="hidden" id="editTaskId">
+                        <div class="mb-3">
+                            <label for="editTaskTitle" class="form-label">Título</label>
+                            <input type="text" class="form-control" id="editTaskTitle" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editTaskDescription" class="form-label">Descripción</label>
+                            <textarea class="form-control" id="editTaskDescription" rows="3"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="editTaskCompleted">
+                                <label class="form-check-label" for="editTaskCompleted">
+                                    Marcar como completada
+                                </label>
+                            </div>
+                        </div>
+                        <div class="text-end">
+                            <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-success-gradient text-white">
+                                <i class="fas fa-save me-1"></i>Guardar Cambios
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Configuración de la API
+        const API_BASE_URL = 'http://localhost:3000/api';
+        let currentUser = null;
+        let tasks = [];
+
+        // Verificar si hay un token al cargar la página
+        document.addEventListener('DOMContentLoaded', function() {
+            const token = localStorage.getItem('jwt_token');
+            if (token) {
+                // Verificar si el token sigue siendo válido
+                loadDashboard();
+            }
+        });
+
+        // Funciones de Autenticación
+        function showRegister() {
+            document.getElementById('loginForm').classList.add('d-none');
+            document.getElementById('registerForm').classList.remove('d-none');
+            clearAlerts();
+        }
+
+        function showLogin() {
+            document.getElementById('registerForm').classList.add('d-none');
+            document.getElementById('loginForm').classList.remove('d-none');
+            clearAlerts();
+        }
+
+        function clearAlerts() {
+            document.getElementById('authAlert').innerHTML = '';
+            document.getElementById('registerAlert').innerHTML = '';
+        }
+
+        async function register(event) {
+            event.preventDefault();
+            
+            const btn = document.getElementById('registerBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Registrando...';
+
+            const username = document.getElementById('registerUsername').value;
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/auth/register`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ username, email, password }),
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    localStorage.setItem('jwt_token', data.token);
+                    currentUser = data.user;
+                    showAlert('registerAlert', 'success', '¡Registro exitoso! Bienvenido ' + data.user.username);
+                    setTimeout(() => {
+                        loadDashboard();
+                    }, 1500);
+                } else {
+                    showAlert('registerAlert', 'danger', data.error || 'Error en el registro');
+                }
+            } catch (error) {
+                showAlert('registerAlert', 'danger', 'Error de conexión con el servidor');
+                console.error('Error:', error);
+            }
+
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-user-plus me-2"></i>Registrarse';
+        }
+
+        async function login(event) {
+            event.preventDefault();
+            
+            const btn = document.getElementById('loginBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Iniciando...';
+
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/auth/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ username, password }),
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    localStorage.setItem('jwt_token', data.token);
+                    currentUser = data.user;
+                    showAlert('authAlert', 'success', '¡Bienvenido ' + data.user.username + '!');
+                    setTimeout(() => {
+                        loadDashboard();
+                    }, 1500);
+                } else {
+                    showAlert('authAlert', 'danger', data.error || 'Credenciales inválidas');
+                }
+            } catch (error) {
+                showAlert('authAlert', 'danger', 'Error de conexión con el servidor');
+                console.error('Error:', error);
+            }
+
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-sign-in-alt me-2"></i>Iniciar Sesión';
+        }
+
+        function logout() {
+            localStorage.removeItem('jwt_token');
+            currentUser = null;
+            tasks = [];
+            
+            // Ocultar dashboard y mostrar auth
+            document.getElementById('dashboardSection').classList.add('d-none');
+            document.getElementById('authSection').classList.remove('d-none');
+            document.getElementById('navbar').classList.add('d-none');
+            
+            // Limpiar formularios
+            document.getElementById('loginUsername').value = '';
+            document.getElementById('loginPassword').value = '';
+            clearAlerts();
+        }
+
+        function loadDashboard() {
+            document.getElementById('authSection').classList.add('d-none');
+            document.getElementById('dashboardSection').classList.remove('d-none');
+            document.getElementById('navbar').classList.remove('d-none');
+            
+            if (currentUser) {
+                document.getElementById('userWelcome').textContent = `Hola, ${currentUser.username}`;
+            }
+            
+            loadTasks();
+        }
+
+        // Funciones de Tareas
+        async function loadTasks() {
+            const spinner = document.getElementById('loadingSpinner');
+            spinner.style.display = 'block';
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/tasks`, {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('jwt_token')}`,
+                    },
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    tasks = data.tasks;
+                    renderTasks();
+                    updateStats();
+                } else if (response.status === 401) {
+                    logout();
+                } else {
+                    console.error('Error al cargar tareas');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+
+            spinner.style.display = 'none';
+        }
+
+        function renderTasks() {
+            const tasksList = document.getElementById('tasksList');
+            const noTasksMessage = document.getElementById('noTasksMessage');
+
+            if (tasks.length === 0) {
+                tasksList.innerHTML = '';
+                noTasksMessage.classList.remove('d-none');
+                return;
+            }
+
+            noTasksMessage.classList.add('d-none');
+            tasksList.innerHTML = '';
+
+            tasks.forEach(task => {
+                const taskElement = createTaskElement(task);
+                tasksList.appendChild(taskElement);
+            });
+        }
+
+        function createTaskElement(task) {
+            const col = document.createElement('div');
+            col.className = 'col-md-6 col-lg-4 mb-3';
+
+            const completedClass = task.completed ? 'completed' : 'pending';
+            const completedIcon = task.completed ? 'fa-check-circle text-success' : 'fa-clock text-warning';
+            const completedText = task.completed ? 'Completada' : 'Pendiente';
+
+            col.innerHTML = `
+                <div class="task-card ${completedClass} fade-in">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <h6 class="card-title mb-0 ${task.completed ? 'text-decoration-line-through' : ''}">${task.title}</h6>
+                            <span class="badge bg-light text-dark">
+                                <i class="fas ${completedIcon} me-1"></i>${completedText}
+                            </span>
+                        </div>
+                        
+                        ${task.description ? `<p class="card-text text-muted small mb-3">${task.description}</p>` : ''}
+                        
+                        <div class="d-flex justify-content-between align-items-center">
+                            <small class="text-muted">
+                                <i class="fas fa-calendar me-1"></i>
+                                ${new Date(task.created_at).toLocaleDateString('es-ES')}
+                            </small>
+                            <div class="task-actions">
+                                <button class="btn btn-sm btn-outline-primary me-1" onclick="editTask(${task.id})" title="Editar">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-sm ${task.completed ? 'btn-outline-warning' : 'btn-outline-success'}" 
+                                        onclick="toggleTaskStatus(${task.id})" 
+                                        title="${task.completed ? 'Marcar como pendiente' : 'Marcar como completada'}">
+                                    <i class="fas ${task.completed ? 'fa-undo' : 'fa-check'}"></i>
+                                </button>
+                                <button class="btn btn-sm btn-danger-gradient text-white ms-1" onclick="deleteTask(${task.id})" title="Eliminar">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            return col;
+        }
+
+        async function createTask(event) {
+            event.preventDefault();
+            
+            const btn = document.getElementById('createTaskBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i>Agregando...';
+
+            const title = document.getElementById('taskTitle').value;
+            const description = document.getElementById('taskDescription').value;
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/tasks`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${localStorage.getItem('jwt_token')}`,
+                    },
+                    body: JSON.stringify({ title, description }),
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    tasks.unshift(data.task);
+                    renderTasks();
+                    updateStats();
+                    
+                    // Limpiar formulario
+                    document.getElementById('taskTitle').value = '';
+                    document.getElementById('taskDescription').value = '';
+                    
+                    showToast('Tarea agregada exitosamente', 'success');
+                } else if (response.status === 401) {
+                    logout();
+                } else {
+                    showToast('Error al crear la tarea', 'danger');
+                }
+            } catch (error) {
+                showToast('Error de conexión', 'danger');
+                console.error('Error:', error);
+            }
+
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-plus me-1"></i>Agregar';
+        }
+
+        function editTask(taskId) {
+            const task = tasks.find(t => t.id === taskId);
+            if (!task) return;
+
+            document.getElementById('editTaskId').value = task.id;
+            document.getElementById('editTaskTitle').value = task.title;
+            document.getElementById('editTaskDescription').value = task.description || '';
+            document.getElementById('editTaskCompleted').checked = task.completed;
+
+            const modal = new bootstrap.Modal(document.getElementById('editTaskModal'));
+            modal.show();
+        }
+
+        async function updateTask(event) {
+            event.preventDefault();
+            
+            const taskId = document.getElementById('editTaskId').value;
+            const title = document.getElementById('editTaskTitle').value;
+            const description = document.getElementById('editTaskDescription').value;
+            const completed = document.getElementById('editTaskCompleted').checked;
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/tasks/${taskId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${localStorage.getItem('jwt_token')}`,
+                    },
+                    body: JSON.stringify({ title, description, completed }),
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    const taskIndex = tasks.findIndex(t => t.id == taskId);
+                    if (taskIndex !== -1) {
+                        tasks[taskIndex] = data.task;
+                        renderTasks();
+                        updateStats();
+                    }
+                    
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('editTaskModal'));
+                    modal.hide();
+                    
+                    showToast('Tarea actualizada exitosamente', 'success');
+                } else if (response.status === 401) {
+                    logout();
+                } else {
+                    showToast('Error al actualizar la tarea', 'danger');
+                }
+            } catch (error) {
+                showToast('Error de conexión', 'danger');
+                console.error('Error:', error);
+            }
+        }
+
+        async function toggleTaskStatus(taskId) {
+            const task = tasks.find(t => t.id === taskId);
+            if (!task) return;
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/tasks/${taskId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${localStorage.getItem('jwt_token')}`,
+                    },
+                    body: JSON.stringify({ completed: !task.completed }),
+                });
+
+               if (response.ok) {
+                    const data = await response.json();
+                    const taskIndex = tasks.findIndex(t => t.id === taskId);
+                    if (taskIndex !== -1) {
+                        tasks[taskIndex] = data.task;
+                        renderTasks();
+                        updateStats();
+                    }
+                    
+                    const statusText = !task.completed ? 'completada' : 'pendiente';
+                    showToast(`Tarea marcada como ${statusText}`, 'success');
+                } else if (response.status === 401) {
+                    logout();
+                } else {
+                    showToast('Error al actualizar el estado de la tarea', 'danger');
+                }
+            } catch (error) {
+                showToast('Error de conexión', 'danger');
+                console.error('Error:', error);
+            }
+        }
+
+        async function deleteTask(taskId) {
+            if (!confirm('¿Estás seguro de que deseas eliminar esta tarea?')) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/tasks/${taskId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('jwt_token')}`,
+                    },
+                });
+
+                if (response.ok) {
+                    tasks = tasks.filter(t => t.id !== taskId);
+                    renderTasks();
+                    updateStats();
+                    showToast('Tarea eliminada exitosamente', 'success');
+                } else if (response.status === 401) {
+                    logout();
+                } else {
+                    showToast('Error al eliminar la tarea', 'danger');
+                }
+            } catch (error) {
+                showToast('Error de conexión', 'danger');
+                console.error('Error:', error);
+            }
+        }
+
+        function updateStats() {
+            const total = tasks.length;
+            const completed = tasks.filter(t => t.completed).length;
+            const pending = total - completed;
+
+            document.getElementById('totalTasks').textContent = total;
+            document.getElementById('completedTasks').textContent = completed;
+            document.getElementById('pendingTasks').textContent = pending;
+        }
+
+        function showAlert(containerId, type, message) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = `
+                <div class="alert alert-${type} alert-custom alert-dismissible fade show" role="alert">
+                    <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-triangle'} me-2"></i>
+                    ${message}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            `;
+            
+            // Auto-ocultar después de 5 segundos
+            setTimeout(() => {
+                const alert = container.querySelector('.alert');
+                if (alert) {
+                    const bsAlert = new bootstrap.Alert(alert);
+                    bsAlert.close();
+                }
+            }, 5000);
+        }
+
+        function showToast(message, type = 'info') {
+            // Crear el toast dinámicamente
+            const toastContainer = document.getElementById('toastContainer') || createToastContainer();
+            
+            const toastId = 'toast-' + Date.now();
+            const iconClass = {
+                'success': 'fa-check-circle',
+                'danger': 'fa-exclamation-circle',
+                'warning': 'fa-exclamation-triangle',
+                'info': 'fa-info-circle'
+            }[type] || 'fa-info-circle';
+
+            const toastHtml = `
+                <div id="${toastId}" class="toast align-items-center text-white bg-${type} border-0" role="alert">
+                    <div class="d-flex">
+                        <div class="toast-body">
+                            <i class="fas ${iconClass} me-2"></i>${message}
+                        </div>
+                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+                    </div>
+                </div>
+            `;
+
+            toastContainer.insertAdjacentHTML('beforeend', toastHtml);
+            
+            const toastElement = document.getElementById(toastId);
+            const toast = new bootstrap.Toast(toastElement, {
+                autohide: true,
+                delay: 4000
+            });
+            
+            toast.show();
+            
+            // Eliminar el toast del DOM después de que se oculte
+            toastElement.addEventListener('hidden.bs.toast', () => {
+                toastElement.remove();
+            });
+        }
+
+        function createToastContainer() {
+            const container = document.createElement('div');
+            container.id = 'toastContainer';
+            container.className = 'toast-container position-fixed top-0 end-0 p-3';
+            container.style.zIndex = '9999';
+            document.body.appendChild(container);
+            return container;
+        }
+
+        // Funciones de utilidad
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        // Manejo de errores globales
+        window.addEventListener('error', (event) => {
+            logger.error('Error global capturado:', event.error);
+            showToast('Ha ocurrido un error inesperado', 'danger');
+        });
+
+        // Manejo de promesas rechazadas no capturadas
+        window.addEventListener('unhandledrejection', (event) => {
+            logger.error('Promesa rechazada no manejada:', event.reason);
+            showToast('Error de conexión con el servidor', 'danger');
+            event.preventDefault();
+        });
+
+        // Auto-refresh de tareas cada 5 minutos
+        setInterval(() => {
+            if (currentUser && !document.getElementById('authSection').classList.contains('d-none')) {
+                loadTasks();
+            }
+        }, 300000); // 5 minutos
+
+        // Manejo de visibilidad de la página para pausar/reanudar actualizaciones
+        document.addEventListener('visibilitychange', () => {
+            if (!document.hidden && currentUser) {
+                loadTasks();
+            }
+        });
+
+        // Verificar conexión periódicamente
+        async function checkConnection() {
+            try {
+                await fetch(`${API_BASE_URL}/health`);
+                return true;
+            } catch (error) {
+                return false;
+            }
+        }
+
+        // Logger simple para el frontend
+        const logger = {
+            info: (message, ...args) => {
+                console.log(`[INFO] ${new Date().toISOString()}: ${message}`, ...args);
+            },
+            warn: (message, ...args) => {
+                console.warn(`[WARN] ${new Date().toISOString()}: ${message}`, ...args);
+            },
+            error: (message, ...args) => {
+                console.error(`[ERROR] ${new Date().toISOString()}: ${message}`, ...args);
+            }
+        };
+
+        // Funciones de validación
+        function validateTaskTitle(title) {
+            if (!title || title.trim().length === 0) {
+                return 'El título es requerido';
+            }
+            if (title.trim().length > 255) {
+                return 'El título no puede exceder 255 caracteres';
+            }
+            return null;
+        }
+
+        function validateTaskDescription(description) {
+            if (description && description.trim().length > 1000) {
+                return 'La descripción no puede exceder 1000 caracteres';
+            }
+            return null;
+        }
+
+        // Mejorar la función createTask con validación
+        const originalCreateTask = createTask;
+        createTask = async function(event) {
+            event.preventDefault();
+            
+            const title = document.getElementById('taskTitle').value.trim();
+            const description = document.getElementById('taskDescription').value.trim();
+            
+            // Validaciones
+            const titleError = validateTaskTitle(title);
+            if (titleError) {
+                showToast(titleError, 'warning');
+                return;
+            }
+            
+            const descriptionError = validateTaskDescription(description);
+            if (descriptionError) {
+                showToast(descriptionError, 'warning');
+                return;
+            }
+            
+            return originalCreateTask.call(this, event);
+        };
+
+        // Función para limpiar datos cuando el usuario cierra sesión
+        function clearUserData() {
+            tasks = [];
+            currentUser = null;
+            
+            // Limpiar formularios
+            document.querySelectorAll('input, textarea').forEach(input => {
+                if (input.type !== 'button' && input.type !== 'submit') {
+                    input.value = '';
+                }
+            });
+            
+            // Limpiar estadísticas
+            document.getElementById('totalTasks').textContent = '0';
+            document.getElementById('completedTasks').textContent = '0';
+            document.getElementById('pendingTasks').textContent = '0';
+            
+            // Limpiar lista de tareas
+            document.getElementById('tasksList').innerHTML = '';
+        }
+
+        // Mejorar la función logout
+        const originalLogout = logout;
+        logout = function() {
+            clearUserData();
+            return originalLogout.call(this);
+        };
+
+        // Función para exportar tareas (bonus feature)
+        function exportTasks() {
+            if (tasks.length === 0) {
+                showToast('No hay tareas para exportar', 'warning');
+                return;
+            }
+
+            const dataStr = JSON.stringify(tasks, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(dataBlob);
+            link.download = `tareas_${new Date().toISOString().split('T')[0]}.json`;
+            link.click();
+            
+            showToast('Tareas exportadas exitosamente', 'success');
+        }
+
+        // Shortcuts de teclado
+        document.addEventListener('keydown', (event) => {
+            // Ctrl/Cmd + Enter para crear tarea rápida
+            if ((event.ctrlKey || event.metaKey) && event.key === 'Enter') {
+                const taskTitle = document.getElementById('taskTitle');
+                if (document.activeElement === taskTitle || document.activeElement === document.getElementById('taskDescription')) {
+                    event.preventDefault();
+                    document.querySelector('#createTaskBtn').click();
+                }
+            }
+            
+            // Escape para cerrar modales
+            if (event.key === 'Escape') {
+                const modals = document.querySelectorAll('.modal.show');
+                modals.forEach(modal => {
+                    const bsModal = bootstrap.Modal.getInstance(modal);
+                    if (bsModal) bsModal.hide();
+                });
+            }
+        });
+
+        // Inicialización final
+        console.log('Task Manager Frontend cargado correctamente');
+        logger.info('Aplicación inicializada');
+    </script>
+</body>
+</html>
+					

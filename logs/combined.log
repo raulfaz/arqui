@@ -1,0 +1,99 @@
+{"level":"info","message":"Servidor iniciado en puerto 3000","service":"task-manager","timestamp":"2025-06-30T21:41:09.614Z"}
+{"ip":"::1","level":"info","message":"Solicitud recibida","method":"POST","service":"task-manager","timestamp":"2025-06-30T21:53:20.555Z","url":"/api/auth/register","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"email":"refaz@espe.edu.ec","level":"info","message":"Usuario registrado exitosamente","service":"task-manager","timestamp":"2025-06-30T21:53:20.871Z","userId":1,"username":"refaz"}
+{"ip":"::1","level":"info","message":"Solicitud recibida","method":"GET","service":"task-manager","timestamp":"2025-06-30T21:53:22.393Z","url":"/api/tasks","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"level":"info","message":"Token validado exitosamente","service":"task-manager","timestamp":"2025-06-30T21:53:22.410Z","userId":1,"username":"refaz"}
+{"level":"info","message":"Tareas obtenidas exitosamente","service":"task-manager","taskCount":0,"timestamp":"2025-06-30T21:53:22.425Z","userId":1}
+{"ip":"::1","level":"info","message":"Solicitud recibida","method":"GET","service":"task-manager","timestamp":"2025-06-30T21:54:30.870Z","url":"/api/tasks","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"level":"info","message":"Token validado exitosamente","service":"task-manager","timestamp":"2025-06-30T21:54:30.878Z","userId":1,"username":"refaz"}
+{"level":"info","message":"Tareas obtenidas exitosamente","service":"task-manager","taskCount":0,"timestamp":"2025-06-30T21:54:30.881Z","userId":1}
+{"ip":"::1","level":"info","message":"Solicitud recibida","method":"POST","service":"task-manager","timestamp":"2025-06-30T21:55:07.796Z","url":"/api/tasks","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"level":"info","message":"Token validado exitosamente","service":"task-manager","timestamp":"2025-06-30T21:55:07.801Z","userId":1,"username":"refaz"}
+{"level":"info","message":"Tarea creada exitosamente","service":"task-manager","taskId":1,"timestamp":"2025-06-30T21:55:07.843Z","title":"Tarea de arquitectura ","userId":1}
+{"ip":"::1","level":"info","message":"Solicitud recibida","method":"GET","service":"task-manager","timestamp":"2025-06-30T21:57:07.913Z","url":"/api/tasks","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"level":"info","message":"Token validado exitosamente","service":"task-manager","timestamp":"2025-06-30T21:57:07.924Z","userId":1,"username":"refaz"}
+{"level":"info","message":"Tareas obtenidas exitosamente","service":"task-manager","taskCount":1,"timestamp":"2025-06-30T21:57:07.934Z","userId":1}
+{"ip":"::1","level":"info","message":"Solicitud recibida","method":"PUT","service":"task-manager","timestamp":"2025-06-30T21:57:18.030Z","url":"/api/tasks/1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"level":"info","message":"Token validado exitosamente","service":"task-manager","timestamp":"2025-06-30T21:57:18.032Z","userId":1,"username":"refaz"}
+{"level":"info","message":"Tarea actualizada exitosamente","service":"task-manager","taskId":"1","timestamp":"2025-06-30T21:57:18.051Z","title":"Tarea de arquitectura ","userId":1}
+{"ip":"::1","level":"info","message":"Solicitud recibida","method":"PUT","service":"task-manager","timestamp":"2025-06-30T21:57:27.566Z","url":"/api/tasks/1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"level":"info","message":"Token validado exitosamente","service":"task-manager","timestamp":"2025-06-30T21:57:27.568Z","userId":1,"username":"refaz"}
+{"level":"info","message":"Tarea actualizada exitosamente","service":"task-manager","taskId":"1","timestamp":"2025-06-30T21:57:27.575Z","title":"Tarea de arquitectura ","userId":1}
+{"ip":"::1","level":"info","message":"Solicitud recibida","method":"GET","service":"task-manager","timestamp":"2025-06-30T21:58:39.198Z","url":"/api/tasks","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"level":"info","message":"Token validado exitosamente","service":"task-manager","timestamp":"2025-06-30T21:58:39.209Z","userId":1,"username":"refaz"}
+{"level":"info","message":"Tareas obtenidas exitosamente","service":"task-manager","taskCount":1,"timestamp":"2025-06-30T21:58:39.214Z","userId":1}
+{"ip":"::1","level":"info","message":"Solicitud recibida","method":"DELETE","service":"task-manager","timestamp":"2025-06-30T21:58:42.826Z","url":"/api/tasks/1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"level":"info","message":"Token validado exitosamente","service":"task-manager","timestamp":"2025-06-30T21:58:42.837Z","userId":1,"username":"refaz"}
+{"level":"info","message":"Tarea eliminada exitosamente","service":"task-manager","taskId":"1","timestamp":"2025-06-30T21:58:42.879Z","title":"Tarea de arquitectura ","userId":1}
+{"ip":"::1","level":"info","message":"Solicitud recibida","method":"GET","service":"task-manager","timestamp":"2025-06-30T22:00:22.110Z","url":"/api/tasks","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"level":"info","message":"Token validado exitosamente","service":"task-manager","timestamp":"2025-06-30T22:00:22.155Z","userId":1,"username":"refaz"}
+{"level":"info","message":"Tareas obtenidas exitosamente","service":"task-manager","taskCount":0,"timestamp":"2025-06-30T22:00:22.161Z","userId":1}
+{"ip":"::1","level":"info","message":"Solicitud recibida","method":"GET","service":"task-manager","timestamp":"2025-06-30T22:03:22.066Z","url":"/api/tasks","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"level":"info","message":"Token validado exitosamente","service":"task-manager","timestamp":"2025-06-30T22:03:22.073Z","userId":1,"username":"refaz"}
+{"level":"info","message":"Tareas obtenidas exitosamente","service":"task-manager","taskCount":0,"timestamp":"2025-06-30T22:03:22.082Z","userId":1}
+{"ip":"::1","level":"info","message":"Solicitud recibida","method":"POST","service":"task-manager","timestamp":"2025-06-30T22:03:34.213Z","url":"/api/auth/login","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"level":"info","message":"Login exitoso","service":"task-manager","timestamp":"2025-06-30T22:03:34.401Z","userId":1,"username":"refaz"}
+{"ip":"::1","level":"info","message":"Solicitud recibida","method":"GET","service":"task-manager","timestamp":"2025-06-30T22:03:35.935Z","url":"/api/tasks","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"level":"info","message":"Token validado exitosamente","service":"task-manager","timestamp":"2025-06-30T22:03:35.949Z","userId":1,"username":"refaz"}
+{"level":"info","message":"Tareas obtenidas exitosamente","service":"task-manager","taskCount":0,"timestamp":"2025-06-30T22:03:36.045Z","userId":1}
+{"ip":"::1","level":"info","message":"Solicitud recibida","method":"GET","service":"task-manager","timestamp":"2025-06-30T22:04:32.282Z","url":"/api/tasks","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"level":"info","message":"Token validado exitosamente","service":"task-manager","timestamp":"2025-06-30T22:04:32.290Z","userId":1,"username":"refaz"}
+{"level":"info","message":"Tareas obtenidas exitosamente","service":"task-manager","taskCount":0,"timestamp":"2025-06-30T22:04:32.294Z","userId":1}
+{"ip":"::1","level":"info","message":"Solicitud recibida","method":"GET","service":"task-manager","timestamp":"2025-06-30T22:04:57.400Z","url":"/api/tasks","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"level":"info","message":"Token validado exitosamente","service":"task-manager","timestamp":"2025-06-30T22:04:57.403Z","userId":1,"username":"refaz"}
+{"level":"info","message":"Tareas obtenidas exitosamente","service":"task-manager","taskCount":0,"timestamp":"2025-06-30T22:04:57.406Z","userId":1}
+{"ip":"::1","level":"info","message":"Solicitud recibida","method":"GET","service":"task-manager","timestamp":"2025-06-30T22:05:04.042Z","url":"/api/tasks","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"level":"info","message":"Token validado exitosamente","service":"task-manager","timestamp":"2025-06-30T22:05:04.056Z","userId":1,"username":"refaz"}
+{"level":"info","message":"Tareas obtenidas exitosamente","service":"task-manager","taskCount":0,"timestamp":"2025-06-30T22:05:04.058Z","userId":1}
+{"level":"info","message":"Servidor iniciado en puerto 3000","service":"task-manager","timestamp":"2025-07-01T01:47:42.187Z"}
+{"ip":"::1","level":"info","message":"Solicitud recibida","method":"POST","service":"task-manager","timestamp":"2025-07-01T01:49:13.822Z","url":"/api/auth/login","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"level":"info","message":"Login exitoso","service":"task-manager","timestamp":"2025-07-01T01:49:14.052Z","userId":1,"username":"refaz"}
+{"ip":"::1","level":"info","message":"Solicitud recibida","method":"GET","service":"task-manager","timestamp":"2025-07-01T01:49:15.595Z","url":"/api/tasks","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"level":"info","message":"Token validado exitosamente","service":"task-manager","timestamp":"2025-07-01T01:49:15.681Z","userId":1,"username":"refaz"}
+{"level":"info","message":"Tareas obtenidas exitosamente","service":"task-manager","taskCount":0,"timestamp":"2025-07-01T01:49:15.755Z","userId":1}
+{"ip":"::1","level":"info","message":"Solicitud recibida","method":"POST","service":"task-manager","timestamp":"2025-07-01T02:29:32.089Z","url":"/api/auth/login","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"level":"info","message":"Login exitoso","service":"task-manager","timestamp":"2025-07-01T02:29:32.228Z","userId":1,"username":"refaz"}
+{"ip":"::1","level":"info","message":"Solicitud recibida","method":"GET","service":"task-manager","timestamp":"2025-07-01T02:29:33.796Z","url":"/api/tasks","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"level":"info","message":"Token validado exitosamente","service":"task-manager","timestamp":"2025-07-01T02:29:33.805Z","userId":1,"username":"refaz"}
+{"level":"info","message":"Tareas obtenidas exitosamente","service":"task-manager","taskCount":0,"timestamp":"2025-07-01T02:29:33.822Z","userId":1}
+{"ip":"::1","level":"info","message":"Solicitud recibida","method":"POST","service":"task-manager","timestamp":"2025-07-01T02:30:00.443Z","url":"/api/tasks","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"level":"info","message":"Token validado exitosamente","service":"task-manager","timestamp":"2025-07-01T02:30:00.448Z","userId":1,"username":"refaz"}
+{"level":"info","message":"Tarea creada exitosamente","service":"task-manager","taskId":2,"timestamp":"2025-07-01T02:30:00.479Z","title":"Tarea de arquitectura ","userId":1}
+{"ip":"::1","level":"info","message":"Solicitud recibida","method":"DELETE","service":"task-manager","timestamp":"2025-07-01T02:30:13.837Z","url":"/api/tasks/2","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"level":"info","message":"Token validado exitosamente","service":"task-manager","timestamp":"2025-07-01T02:30:13.840Z","userId":1,"username":"refaz"}
+{"level":"info","message":"Tarea eliminada exitosamente","service":"task-manager","taskId":"2","timestamp":"2025-07-01T02:30:13.870Z","title":"Tarea de arquitectura ","userId":1}
+{"ip":"::1","level":"info","message":"Solicitud recibida","method":"GET","service":"task-manager","timestamp":"2025-07-01T02:31:33.043Z","url":"/api/tasks","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"level":"info","message":"Token validado exitosamente","service":"task-manager","timestamp":"2025-07-01T02:31:33.046Z","userId":1,"username":"refaz"}
+{"level":"info","message":"Tareas obtenidas exitosamente","service":"task-manager","taskCount":0,"timestamp":"2025-07-01T02:31:33.060Z","userId":1}
+{"ip":"::1","level":"info","message":"Solicitud recibida","method":"GET","service":"task-manager","timestamp":"2025-07-01T02:31:39.228Z","url":"/api/tasks","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"level":"info","message":"Token validado exitosamente","service":"task-manager","timestamp":"2025-07-01T02:31:39.231Z","userId":1,"username":"refaz"}
+{"level":"info","message":"Tareas obtenidas exitosamente","service":"task-manager","taskCount":0,"timestamp":"2025-07-01T02:31:39.234Z","userId":1}
+{"ip":"::1","level":"info","message":"Solicitud recibida","method":"GET","service":"task-manager","timestamp":"2025-07-01T02:31:44.987Z","url":"/api/tasks","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"level":"info","message":"Token validado exitosamente","service":"task-manager","timestamp":"2025-07-01T02:31:44.990Z","userId":1,"username":"refaz"}
+{"level":"info","message":"Tareas obtenidas exitosamente","service":"task-manager","taskCount":0,"timestamp":"2025-07-01T02:31:44.993Z","userId":1}
+{"ip":"::1","level":"info","message":"Solicitud recibida","method":"GET","service":"task-manager","timestamp":"2025-07-01T02:31:47.268Z","url":"/api/tasks","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"level":"info","message":"Token validado exitosamente","service":"task-manager","timestamp":"2025-07-01T02:31:47.274Z","userId":1,"username":"refaz"}
+{"level":"info","message":"Tareas obtenidas exitosamente","service":"task-manager","taskCount":0,"timestamp":"2025-07-01T02:31:47.277Z","userId":1}
+{"ip":"::1","level":"info","message":"Solicitud recibida","method":"GET","service":"task-manager","timestamp":"2025-07-01T02:34:01.661Z","url":"/api/tasks","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"level":"info","message":"Token validado exitosamente","service":"task-manager","timestamp":"2025-07-01T02:34:01.665Z","userId":1,"username":"refaz"}
+{"level":"info","message":"Tareas obtenidas exitosamente","service":"task-manager","taskCount":0,"timestamp":"2025-07-01T02:34:01.669Z","userId":1}
+{"ip":"::1","level":"info","message":"Solicitud recibida","method":"GET","service":"task-manager","timestamp":"2025-07-01T02:35:08.464Z","url":"/api/tasks","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"level":"info","message":"Token validado exitosamente","service":"task-manager","timestamp":"2025-07-01T02:35:08.467Z","userId":1,"username":"refaz"}
+{"level":"info","message":"Tareas obtenidas exitosamente","service":"task-manager","taskCount":0,"timestamp":"2025-07-01T02:35:08.471Z","userId":1}
+{"ip":"::1","level":"info","message":"Solicitud recibida","method":"POST","service":"task-manager","timestamp":"2025-07-01T02:41:29.052Z","url":"/api/tasks","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"level":"info","message":"Token validado exitosamente","service":"task-manager","timestamp":"2025-07-01T02:41:29.074Z","userId":1,"username":"refaz"}
+{"level":"info","message":"Tarea creada exitosamente","service":"task-manager","taskId":3,"timestamp":"2025-07-01T02:41:29.080Z","title":"Tarea de arquitectura ","userId":1}
+{"ip":"::1","level":"info","message":"Solicitud recibida","method":"POST","service":"task-manager","timestamp":"2025-07-01T02:44:54.394Z","url":"/api/auth/login","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"level":"info","message":"Login exitoso","service":"task-manager","timestamp":"2025-07-01T02:44:54.552Z","userId":1,"username":"refaz"}
+{"ip":"::1","level":"info","message":"Solicitud recibida","method":"GET","service":"task-manager","timestamp":"2025-07-01T02:44:56.082Z","url":"/api/tasks","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"level":"info","message":"Token validado exitosamente","service":"task-manager","timestamp":"2025-07-01T02:44:56.092Z","userId":1,"username":"refaz"}
+{"level":"info","message":"Tareas obtenidas exitosamente","service":"task-manager","taskCount":1,"timestamp":"2025-07-01T02:44:56.101Z","userId":1}
+{"ip":"::1","level":"info","message":"Solicitud recibida","method":"GET","service":"task-manager","timestamp":"2025-07-01T02:45:57.317Z","url":"/api/tasks","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"level":"info","message":"Token validado exitosamente","service":"task-manager","timestamp":"2025-07-01T02:45:57.331Z","userId":1,"username":"refaz"}
+{"level":"info","message":"Tareas obtenidas exitosamente","service":"task-manager","taskCount":1,"timestamp":"2025-07-01T02:45:57.337Z","userId":1}
+{"ip":"::1","level":"info","message":"Solicitud recibida","method":"GET","service":"task-manager","timestamp":"2025-07-01T03:03:34.503Z","url":"/api/tasks","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"level":"info","message":"Token validado exitosamente","service":"task-manager","timestamp":"2025-07-01T03:03:34.506Z","userId":1,"username":"refaz"}
+{"level":"info","message":"Tareas obtenidas exitosamente","service":"task-manager","taskCount":1,"timestamp":"2025-07-01T03:03:34.509Z","userId":1}
+{"ip":"::1","level":"info","message":"Solicitud recibida","method":"GET","service":"task-manager","timestamp":"2025-07-01T03:33:34.538Z","url":"/api/tasks","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
+{"level":"info","message":"Token validado exitosamente","service":"task-manager","timestamp":"2025-07-01T03:33:34.547Z","userId":1,"username":"refaz"}
+{"level":"info","message":"Tareas obtenidas exitosamente","service":"task-manager","taskCount":1,"timestamp":"2025-07-01T03:33:34.560Z","userId":1}
